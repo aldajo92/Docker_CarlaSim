@@ -1,0 +1,24 @@
+#!/bin/bash
+
+PROJECT_ROOT="$(cd "$(dirname "$0")"; cd ..; pwd)"
+source ${PROJECT_ROOT}/config_docker.sh
+
+docker run -it \
+    --privileged \
+    --runtime=nvidia \
+    --gpus all \
+    -e NVIDIA_VISIBLE_DEVICES=all \
+    -e NVIDIA_DRIVER_CAPABILITIES=all \
+    -e DISPLAY \
+    -e TERM \
+    -e QT_X11_NO_MITSHM=1 \
+    -e XAUTHORITY \
+    -e XDG_RUNTIME_DIR=/tmp/runtime-root \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v $XAUTHORITY:$XAUTHORITY \
+    -v ${PROJECT_ROOT}/scripts:/home/carla/scripts \
+    --ipc="host" \
+    --name ${DOCKER_CONTAINER_NAME} \
+    --network ${DOCKER_NETWORK} \
+    --rm \
+    ${DOCKER_IMAGE_NAME}
