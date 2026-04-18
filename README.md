@@ -8,6 +8,17 @@ A Docker-based setup for running [CARLA Simulator 0.9.15](https://carla.org/) on
 - NVIDIA GPU + [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html) (for `nvidia_run.sh`)
 - X11 display (for the simulator window)
 
+## Nvidia Container Toolkit (Optional)
+
+To enable Nvidia GPU acceleration inside containers, install the [Nvidia Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) to provide GPU support.
+
+![](.media/nvidia_toolkit.png)
+
+Then check with:
+```
+docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
+```
+
 ## Project Structure
 
 ```
